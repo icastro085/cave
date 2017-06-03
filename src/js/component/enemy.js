@@ -27,12 +27,14 @@ export default Q.component('Enemy', {
     },
     attack: function(collision) {
       let player = collision.obj;
-      if (player.isA('Player')) {
+      if (player.isA('Player') && !player.p.immuneCount) {
         let index = this.p.vx < 0 ? 1 : -1;
 
         player.animate({
           x: player.p.x + 50 * index,
-        }, 0.1, Q.Easing.Quadratic.InOut);
+        }, 0.1);
+
+        player.p.immuneCount = 100;
       }
     },
     step: function() {

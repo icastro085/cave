@@ -31,6 +31,13 @@ export default Q.Sprite.extend(
       } else {
         this.play('stand');
       }
+
+      if (this.p.immuneCount) {
+        this.p.immuneCount--;
+        this.p.opacity = this.p.immuneCount%10 ? 1 : 0;
+      } else {
+        this.p.opacity = 1;
+      }
     },
   }
 );
