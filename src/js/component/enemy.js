@@ -5,7 +5,11 @@ export default Q.component('Enemy', {
     this.entity.add('aiBounce, animation');
     this.entity.play('run');
     this.entity.on('bump.top', this.entity, 'die');
-    this.entity.p.deadTimer = 0;
+    this.entity.on(
+      'bump.left, bump.right, bump.bottom',
+      this.entity,
+      'attack'
+    );
   },
 
   extend: {
@@ -18,8 +22,17 @@ export default Q.component('Enemy', {
         this.play('die');
         this.p.gravityY = Q.gravityY;
         this.p.sensor = true;
-
         player.p.vy = -600;
+      }
+    },
+    attack: function(collision) {
+      let player = collision.obj;
+      if (player.isA('Player')) {
+        let index = this.p.vx < 0 ? 1 : -1;
+
+        player.animate({
+          x: player.p.x + 50 * index,
+        }, 0.1, Q.Easing.Quadratic.InOut);
       }
     },
     step: function() {

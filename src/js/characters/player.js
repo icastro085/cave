@@ -14,7 +14,7 @@ export default Q.Sprite.extend(
         sprite: 'player',
       });
 
-      this.add('2d, platformerControls, animation');
+      this.add('2d, platformerControls, animation, tween');
     },
 
     step: function(dt) {
