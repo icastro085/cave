@@ -35,6 +35,7 @@ export default Q.component('Enemy', {
         }, 0.1);
 
         player.p.immuneCount = 100;
+        player.trigger('hitOfEnemy',this);
       }
     },
     step: function() {

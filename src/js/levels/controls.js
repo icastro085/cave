@@ -22,7 +22,7 @@ Q.component('Control', {
   },
 });
 
-let ControlDirectionBack = Q.Sprite.extend(
+Q.Sprite.extend(
   'ControlDirectionBack',
   {
     init: function(p) {
@@ -36,7 +36,7 @@ let ControlDirectionBack = Q.Sprite.extend(
   }
 );
 
-let ControlDirection = Q.Sprite.extend(
+Q.Sprite.extend(
   'ControlDirection',
   {
     init: function(p) {
@@ -90,7 +90,7 @@ let ControlDirection = Q.Sprite.extend(
   }
 );
 
-let ControlAction = Q.Sprite.extend(
+Q.Sprite.extend(
   'ControlAction',
   {
     init: function(p) {
@@ -105,7 +105,7 @@ let ControlAction = Q.Sprite.extend(
   }
 );
 
-let ControlFire = Q.Sprite.extend(
+Q.Sprite.extend(
   'ControlFire',
   {
     init: function(p) {
@@ -124,9 +124,9 @@ export default Q.scene('Controls', function(stage) {
   hs = stage.options.h;
   ws = stage.options.w;
 
-  stage.insert(new ControlDirection());
-  stage.insert(new ControlDirectionBack());
+  stage.insert(new Q.ControlDirection());
+  stage.insert(new Q.ControlDirectionBack());
 
-  stage.insert(new ControlAction());
-  stage.insert(new ControlFire());
+  stage.insert(new Q.ControlAction());
+  stage.insert(new Q.ControlFire());
 });

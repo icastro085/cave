@@ -15,6 +15,7 @@ export default Q.Sprite.extend(
       });
 
       this.add('2d, platformerControls, animation, tween');
+      this.on('hitOfEnemy');
     },
 
     step: function(dt) {
@@ -39,5 +40,18 @@ export default Q.Sprite.extend(
         this.p.opacity = 1;
       }
     },
+
+    hitOfEnemy: function(enemy) {
+      let damageHeart = enemy.p.damageHeart || 0.5;
+      let heartCount = this.stage.options.heartCount;
+
+      let heart = Q('Heart', 2).at(Math.ceil(heartCount) - 1);
+      heart.trigger('damageHeart', damageHeart);
+      this.stage.options.heartCount -= damageHeart;
+
+      if (this.stage.options.heartCount <= 0) {
+        Q.stage(0).pause(); 
+      }
+    }
   }
 );

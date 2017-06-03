@@ -1,6 +1,11 @@
 import Q from './../q';
 
 import Controls from './controls.js';
+import Ui from './ui.js';
+
+let stageOptions = {
+  heartCount: 3,
+};
 
 let Level11 = Q.scene('Level11', function(stage) {
   Q.audio.play(
@@ -50,10 +55,13 @@ export default class Level {
    * @method onLoad
    */
   onLoad() {
-    Q.stageScene(Level11, 0);
+    Q.stageScene(Level11, 0, stageOptions);
+    
     if (Q.touchDevice) {
-      Q.stageScene(Controls, 1);
+      Q.stageScene(Controls, 1, stageOptions);
     }
+
+    Q.stageScene(Ui, 2, stageOptions);
   }
 
  /**
