@@ -29,5 +29,8 @@
     "webpack": "^2.5.1",
     "webpack-dev-server": "^2.4.5",
     "webpack-stream": "^3.2.0"
+  },
+  "dependencies": {
+    "nconf": "^0.8.4"
   }
 }

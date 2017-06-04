@@ -1,4 +1,5 @@
 import Q from './../q';
+import config from './../config';
 
 Q.animations('player', {
   run: {frames: [9, 10], rate: 1/5},
@@ -43,15 +44,17 @@ export default Q.Sprite.extend(
 
     hitOfEnemy: function(enemy) {
       let damageHeart = enemy.p.damageHeart || 0.5;
-      let heartCount = this.stage.options.heartCount;
+      let heartCount = config.heartCount;
 
-      let heart = Q('Heart', 2).at(Math.ceil(heartCount) - 1);
+      let heart = Q('Heart', 2).at(// eslint-disable-line
+        Math.ceil(heartCount) - 1
+      );
       heart.trigger('damageHeart', damageHeart);
-      this.stage.options.heartCount -= damageHeart;
+      config.heartCount -= damageHeart;
 
-      if (this.stage.options.heartCount <= 0) {
-        Q.stage(0).pause(); 
+      if (config.heartCount <= 0) {
+        Q.stage(0).pause();
       }
-    }
+    },
   }
 );

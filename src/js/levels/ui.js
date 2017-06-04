@@ -1,4 +1,5 @@
 import Q from './../q';
+import config from './../config';
 
 const EMPTY_HEART = 361;
 const FULL_HEART = 362;
@@ -27,13 +28,13 @@ Q.Sprite.extend(
           break;
         default:
       }
-    }
+    },
   }
 );
 
 export default Q.scene('Ui', function(stage) {
   let i;
-  let heartCount = stage.options.heartCount;
+  let heartCount = config.heartCount;
 
   for (i=0; i<heartCount; i++) {
     stage.insert(new Q.Heart({

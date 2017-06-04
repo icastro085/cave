@@ -1,4 +1,5 @@
 import Q from './../q';
+import config from './../config';
 
 let ws = 0;
 let hs = 0;
@@ -11,12 +12,17 @@ Q.component('Control', {
 
   extend: {
     touch: function() {
-      Q.inputs[this.p.actionName] = true;
-      Q.input.trigger(this.p.actionName);
+      if (this.p.actionName) {
+        Q.inputs[this.p.actionName] = true;
+        Q.input.trigger(this.p.actionName);
+      }
+
       this.p.opacity = 0.75;
     },
     touchEnd: function() {
-      Q.inputs[this.p.actionName] = false;
+      if (this.p.actionName) {
+        Q.inputs[this.p.actionName] = false;
+      }
       this.p.opacity = 0.5;
     },
   },
@@ -27,7 +33,7 @@ Q.Sprite.extend(
   {
     init: function(p) {
       this._super(p, {
-        asset: 'flatDark10.png',
+        asset: 'controlCircle.png',
         y: hs - 100,
         x: 200,
         opacity: 0.5,
@@ -41,7 +47,7 @@ Q.Sprite.extend(
   {
     init: function(p) {
       this._super(p, {
-        asset: 'flatDark00.png',
+        asset: 'controlDirection.png',
 
         y: hs - 100,
         x: 200,
@@ -95,7 +101,7 @@ Q.Sprite.extend(
   {
     init: function(p) {
       this._super(p, {
-        asset: 'flatDark36.png',
+        asset: 'b.png',
         y: hs - 75,
         x: ws - 150,
         actionName: 'action',
@@ -110,12 +116,39 @@ Q.Sprite.extend(
   {
     init: function(p) {
       this._super(p, {
-        asset: 'flatDark35.png',
+        asset: 'a.png',
         y: hs - 175,
         x: ws - 100,
         actionName: 'fire',
       });
       this.add('Control');
+    },
+  }
+);
+
+Q.Sprite.extend(
+  'ControlPause',
+  {
+    init: function(p) {
+      this._super(p, {
+        asset: 'pause.png',
+        y: 50,
+        x: ws - 75,
+        opacity: 1,
+      });
+      this.on('touch, touchEnd');
+    },
+
+    touch: function() {
+      Q.stage(config.index.level).pause();
+      Q.clearStage(config.index.control);
+      Q.stageScene('Paused', config.index.paused);
+
+      this.p.opacity = 0.75;
+    },
+
+    touchEnd: function() {
+      this.p.opacity = 1;
     },
   }
 );
@@ -129,4 +162,6 @@ export default Q.scene('Controls', function(stage) {
 
   stage.insert(new Q.ControlAction());
   stage.insert(new Q.ControlFire());
+
+  stage.insert(new Q.ControlPause());
 });

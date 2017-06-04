@@ -7,5 +7,9 @@ import Tile from './levels/tile';// eslint-disable-line
 
 import Level11 from './levels/level-1-1.js';
 
+import Controls from './levels/controls.js';// eslint-disable-line
+import Ui from './levels/ui.js';// eslint-disable-line
+import Paused from './levels/paused.js';// eslint-disable-line
+
 let level = new Level11();
 level.start();

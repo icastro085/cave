@@ -1,19 +1,10 @@
 import Q from './../q';
+import config from './../config';
 
-import Controls from './controls.js';
-import Ui from './ui.js';
+import Sound from './sound.js';
 
-let stageOptions = {
-  heartCount: 3,
-};
-
-let Level11 = Q.scene('Level11', function(stage) {
-  Q.audio.play(
-    'forest-of-illusion.mp3',
-    {
-      loop: true,
-    }
-  );
+Q.scene('Level11', function(stage) {
+  Sound.play('level11:loop');
 
   Q.stageTMX('level-1-1.tmx', stage);
   const p = stage._collisionLayers[0].p;
@@ -32,18 +23,14 @@ let Level11 = Q.scene('Level11', function(stage) {
  * @class Level
  */
 export default class Level {
-
   /**
    * Starting load all assests
    */
   start() {
     Q.loadTMX(
-      [
+      config.defaultAssests.concat([
         'level-1-1.tmx',
-        'forest-of-illusion.mp3',
-        'flatDark00.png, flatDark10.png',
-        'flatDark35.png, flatDark36.png',
-      ].join(','),
+      ]).join(','),
       this.onLoad,
       {
         progressCallback: this.onProgress,
@@ -55,13 +42,11 @@ export default class Level {
    * @method onLoad
    */
   onLoad() {
-    Q.stageScene(Level11, 0, stageOptions);
-    
+    Q.stageScene('Level11', config.index.level);
+    Q.stageScene('Ui', config.index.ui);
     if (Q.touchDevice) {
-      Q.stageScene(Controls, 1, stageOptions);
+      Q.stageScene('Controls', config.index.control);
     }
-
-    Q.stageScene(Ui, 2, stageOptions);
   }
 
  /**
