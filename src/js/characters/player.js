@@ -46,14 +46,14 @@ export default Q.Sprite.extend(
       let damageHeart = enemy.p.damageHeart || 0.5;
       let heartCount = config.heartCount;
 
-      let heart = Q('Heart', 2).at(// eslint-disable-line
+      let heart = Q('Heart', config.index.ui).at(// eslint-disable-line
         Math.ceil(heartCount) - 1
       );
       heart.trigger('damageHeart', damageHeart);
       config.heartCount -= damageHeart;
 
       if (config.heartCount <= 0) {
-        Q.stage(0).pause();
+        Q.stage(config.index.level).pause();
       }
     },
   }
