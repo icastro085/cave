@@ -21,8 +21,11 @@ Q.Sprite.extend(
 
     touch: function() {
       Q.stage(config.index.level).unpause();
-      Q.stageScene('Controls', config.index.control);
       Q.clearStage(config.index.paused);
+      Q.stageScene('Controls', config.index.control);
+
+      Sound.play('level11:loop');
+
       this.p.opacity = 0.75;
     },
 
@@ -49,11 +52,9 @@ Q.Sprite.extend(
       if (config.canPlay) {
         config.canPlay = false;
         this.p.asset = 'soundOff.png';
-        Sound.stop();
       } else {
         config.canPlay = true;
         this.p.asset = 'soundOn.png';
-        Sound.play('level11:loop');
       }
       this.p.opacity = 0.75;
     },
@@ -86,5 +87,4 @@ export default Q.scene('Paused', function(stage) {
 
   box.insert(new Q.ControlContinue());
   box.insert(new Q.ControlSound());
-
 });

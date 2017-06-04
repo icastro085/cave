@@ -1,6 +1,8 @@
 import Q from './../q';
 import config from './../config';
 
+import Sound from './sound.js';
+
 let ws = 0;
 let hs = 0;
 
@@ -143,6 +145,8 @@ Q.Sprite.extend(
       Q.stage(config.index.level).pause();
       Q.clearStage(config.index.control);
       Q.stageScene('Paused', config.index.paused);
+
+      Sound.stop();
 
       this.p.opacity = 0.75;
     },

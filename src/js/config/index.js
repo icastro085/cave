@@ -2,11 +2,11 @@ export default {
   heartCount: 3,
   index: {
     level: 0,
-    control: 1,
-    ui: 2,
+    ui: 1,
+    control: 2,
     paused: 2,
   },
-  canPlay: true,
+  canPlay: false,
   defaultAssests: [
     'level11.mp3',
     'a.png',

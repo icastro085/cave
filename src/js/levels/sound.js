@@ -15,5 +15,5 @@ export default {
 
   stop: function(label) {
     Q.audio.stop(label ? `${label}.mp3` : null);
-  }
+  },
 };
